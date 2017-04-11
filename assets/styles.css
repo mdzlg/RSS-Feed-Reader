@@ -1,0 +1,148 @@
+a {
+    color: #05487a;
+    text-decoration: none;
+}
+a:hover {
+    color: #05487a;
+    text-decoration: none;
+}
+a.btn {
+  margin-right: 10px;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+body {
+    padding: 0;
+}
+.header {
+    margin-bottom: 30px
+}
+.header .container {
+    max-width: 1170px;
+    min-width: 992px;
+    margin:0 auto
+}
+.news .container {
+    max-width: 1170px;
+    min-width: 992px;
+    margin:0 auto
+}
+@media (min-width:300px) and (max-width:659px) {
+    .header .container {
+        max-width: 100%;
+        min-width: 100%;
+        margin:0 auto
+    }
+    .news .container {
+        max-width: 100%;
+        min-width: 100%;
+        margin:0 auto
+    }
+}
+@media (min-width:660px) and (max-width:991px) {
+    .header .container {
+        max-width: 100%;
+        min-width: 100%;
+        margin:0 auto
+    }
+    .news .container {
+        max-width: 100%;
+        min-width: 100%;
+        margin:0 auto
+    }
+}
+.header .menu {
+    width: 100%;
+    height: 90px;
+    padding-top: 25px;
+    box-sizing: border-box;
+    background-color: #0d74bf;
+    -moz-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 3px rgba(0,0,0,0.2)
+}
+@media (min-width: 300px) and (max-width: 659px) {
+    .header .menu {
+        padding-top: 23px;
+        height: 60px
+    }
+}
+@media (min-width: 660px) and (max-width: 991px) {
+    .header .menu {
+        padding-top: 23px;
+        height: 60px
+    }
+}
+.header .menu .brand {
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    margin-top: 7px
+}
+.header .menu .brand img{
+    width: 260px
+}
+@media (min-width: 300px) and (max-width: 659px) {
+    .header .menu .brand {
+        margin-top: 0 !important
+    }
+    .header .menu .brand img {
+        width: 170px !important
+    }
+}
+
+.header .menu h1 {
+    color: #FFF;
+    /*font-family: 'Roboto Slab',serif;*/
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0;
+    margin: 0
+}
+.header .menu h1 a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin-top: 2px
+}
+@media (min-width: 660px) and (max-width: 991px) {
+    .header .menu .brand {
+        margin-top: 0
+    }
+    .header .menu .brand img{
+        width: 170px
+    }
+    .header .menu h1 {
+        font-size: 30px;
+        line-height: 18px;
+    }
+    .header .menu h1 a {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        margin-top: 2px
+    }
+}
+@media (min-width: 992px) {
+    .header .menu h1 {
+        margin: 10px 0 0 0
+    }
+}
+@media (min-width: 300px) and (max-width: 659px) {
+    .header .menu h1 {
+        font-size: 22px
+    }
+}
+@media (min-width: 660px) and (max-width: 991px) {
+    .header .menu h1 {
+        font-size: 22px
+    }
+}
+.news .row div {
+    margin: 0 0 50px 0;
+}
+.news .h5, .news h5 {
+    line-height: 1.4;
+}
