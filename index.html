@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="La Gaceta">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
-    <title>RSS Feed Reader</title>
+    <title></title>
 
     <link href="assets/bootstrap.min.css" rel="stylesheet">
     <link href="assets/styles.css" rel="stylesheet">
@@ -101,10 +103,11 @@
             url: '/getnews',
             dataType: 'json',
             success: function (data) {
-
-            /*    console.log(data); */
+                /*console.log(data);*/
 
                 if (data.status == "ok") {
+                    $("title").append(data.items[0].title);
+
                     $.each(data.items, function (index, callback) {
                         $("#row").append('<div class="col-md-4"><a class="" href="' + callback.link + '" role="button" target="_blank"><h5>' + callback.title + '</h5></a><p>' + callback.description + '</p><p id="tags-' + index + '"></p></div>');
 
