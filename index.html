@@ -10,7 +10,8 @@
 
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="prefetch" href="/assets/jquery-3.2.0.min.js">
+    <!--<link rel="prefetch" href="/assets/jquery-3.2.0.min.js">-->
+    <link rel="prefetch" href="/assets/zepto.min.js">
     <link rel="prefetch" href="/assets/tether.min.js">
     <link rel="prefetch" href="/assets/bootstrap.min.css">
     <link rel="prefetch" href="/assets/styles.css">
@@ -42,7 +43,8 @@
         </div>
     </div>
 
-    <script src="assets/jquery-3.2.0.min.js"></script>
+    <!--<script src="assets/jquery-3.2.0.min.js"></script>-->
+    <script src="assets/zepto.min.js"></script>
     <script src="assets/tether.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/ie10-viewport-bug-workaround.js"></script>
@@ -126,6 +128,7 @@
 
         $.ajax({
             url: '/getnews',
+            //url: 'http://tucumano.com.ar/getnews',
             dataType: 'json',
             success: function (data) {
                 /*console.log(data);*/
