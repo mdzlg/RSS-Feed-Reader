@@ -100,29 +100,29 @@
             "Loterías y quinielas": {path:"quinielas"}
         };
 
-	var slug = function(str) {
-		    str = str.replace(/^\s+|\s+$/g, ''); // trim
-		    str = str.toLowerCase();
+        var slug = function(str) {
+            str = str.replace(/^\s+|\s+$/g, ''); // trim
+            str = str.toLowerCase();
 
-		    // remove accents, swap ñ for n, etc
-		    var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
-		    var to   = "aaaaaeeeeeiiiiooooouuuunc------";
-		    for (var i=0, l=from.length ; i<l ; i++) {
-			str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-		    }
+            // remove accents, swap ñ for n, etc
+            var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+            var to   = "aaaaaeeeeeiiiiooooouuuunc------";
+            for (var i=0, l=from.length ; i<l ; i++) {
+                str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+            }
 
-		    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-			    .replace(/\s+/g, '_') // collapse whitespace and replace by -
-			    .replace(/_+/g, '_'); // collapse dashes
+            str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+                     .replace(/\s+/g, '_') // collapse whitespace and replace by -
+                     .replace(/_+/g, '_'); // collapse dashes
 
-		    return str;
-	};
+            return str;
+        };
 
         function searchCatURL (categorie) {
             if (categories[categorie]) {
                 return url_base + categories[categorie].path;
             }
-//            return "javascript:void(0);";
+            //return "javascript:void(0);";
             return url_base + "buscar/" + slug(categorie);
         }
 
@@ -139,7 +139,7 @@
                         $("#row").append('<div class="col-md-4"><a class="" href="' + callback.link + '" role="button" target="_blank"><h5>' + callback.title + '</h5></a><p>' + callback.description + '</p><p id="tags-' + index + '"></p></div>');
 
                         $.each(callback.categories, function (indexCat, callbackCat) {
-                            /*console.log(callbackCat);*/
+                            //console.log(callbackCat);
                             $("#tags-" + index).append('<a class="btn btn-secondary btn-sm" href="' + searchCatURL(callbackCat) + '" role="button" target="_blank">' + callbackCat + '</a>');
                         });
                     });
