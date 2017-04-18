@@ -138,6 +138,16 @@ ssl_ciphers "ECDHE-ECDSA-AES128-GCM-SHA256 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-E
 server {
     listen 80;
     listen [::]:80;
+
+    ## Compression
+    gzip              on;
+    gzip_buffers      16 8k;
+    gzip_comp_level   4;
+    gzip_http_version 1.0;
+    gzip_min_length   1280;
+    gzip_types        text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript image/x-icon image/bmp application/json;
+    gzip_vary         on;
+
     server_name www.diariotucuman.com.ar diariotucuman.com.ar 
 		www.tucumano.com.ar tucumano.com.ar 
 		gacenet.com
@@ -147,11 +157,18 @@ server {
 	;
     
     location / {
-		return 301 http://www.lagaceta.com.ar;
+		expires 1h;
+		try_files $uri $uri/ =404;
+#		return 301 http://www.lagaceta.com.ar;
     }
-    location / {
+    location /getnews {
+	expires 8m;
+	proxy_cache backcache;
+	proxy_cache_bypass $http_cache_control;
+	add_header X-Proxy-Cache $upstream_cache_status;
+
         include proxy_params;
-        proxy_pass http://172.17.0.18:9000;
+        proxy_pass https://api.rss2json.com/v1/api.json?api_key=d1ufn2m6kmtwzt6iw9symnlfycs0d4nfkcybdxmv&rss_url=http://www.lagaceta.com.ar/rss/seleccionadas;
     }
     listen 443 ssl; # managed by Certbot
 ssl_certificate /etc/letsencrypt/live/lagaceta.press/fullchain.pem; # managed by Certbot
