@@ -10,17 +10,21 @@
 
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <!--<link rel="prefetch" href="/assets/jquery-3.2.0.min.js">-->
-    <link rel="prefetch" href="/assets/zepto.min.js">
-    <link rel="prefetch" href="/assets/tether.min.js">
-    <link rel="prefetch" href="/assets/bootstrap.min.css">
-    <link rel="prefetch" href="/assets/styles.css">
+
     <link rel="prefetch" href="/getnews">
+    <!--<link rel="prefetch" href="assets/jquery-3.2.1.min.js">-->
+    <!--<link rel="prefetch" href="https://code.jquery.com/jquery-3.2.1.min.js">-->
+    <link rel="prefetch" href="assets/zepto.min.js">
+    <!--<link rel="prefetch" href="assets/tether.min.js">-->
+    <!--<link rel="prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js">-->
+    <link rel="prefetch" href="assets/tether.min-1.4.0.js">
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+    <!--<link href="assets/bootstrap.min.custom.css" rel="stylesheet">-->
     <link href="assets/bootstrap.min.css" rel="stylesheet">
     <link href="assets/styles.css" rel="stylesheet">
 </head>
 <body>
-
     <div class="header">
         <div class="menu">
             <div class="container">
@@ -36,21 +40,33 @@
     <div class="news">
         <div class="container">
             <div class="row" id="row"></div>
-                <hr>
-                <footer>
+            <hr>
+            <footer>
                 <p>&copy; LG RSS Reader 2017</p>
-                </footer>
+            </footer>
         </div>
     </div>
 
-    <!--<script src="assets/jquery-3.2.0.min.js"></script>-->
+    <!--<script src="assets/jquery-3.2.1.min.js"></script>-->
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script>
+        if (!window.jQuery) {
+            document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"><\/script>'); 
+        }
+        if (!window.jQuery) {
+            document.write('<script src="assets/jquery-3.2.1.min.js"><\/script>'); 
+        }
+    </script>-->
     <script src="assets/zepto.min.js"></script>
-    <script src="assets/tether.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
+    <!--<script src="assets/tether.min.js"></script>-->
+    <script src="assets/tether.min-1.4.0.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="assets/ie10-viewport-bug-workaround.js"></script>
-
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
     <script type="text/javascript">
-
         var url_base = 'http://www.lagaceta.com.ar/';
         var categories = {
             "Último momento": {path:"ultimo-momento"},
@@ -100,7 +116,7 @@
             "Loterías y quinielas": {path:"quinielas"}
         };
 
-        var slug = function(str) {
+        var slug = function (str) {
             str = str.replace(/^\s+|\s+$/g, ''); // trim
             str = str.toLowerCase();
 
@@ -118,16 +134,16 @@
             return str;
         };
 
-        function searchCatURL (categorie) {
+        var searchCatURL = function (categorie) {
             if (categories[categorie]) {
                 return url_base + categories[categorie].path;
             }
-            //return "javascript:void(0);";
             return url_base + "buscar/" + slug(categorie);
-        }
+        };
 
         $.ajax({
-            url: '/getnews',
+            //url: '/getnews',
+            url: 'http://tucumano.com.ar/getnews',
             dataType: 'json',
             success: function (data) {
                 /*console.log(data);*/
@@ -136,7 +152,7 @@
                     $("title").append(data.items[0].title);
 
                     $.each(data.items, function (index, callback) {
-                        $("#row").append('<div class="col-md-4"><a class="" href="' + callback.link + '" role="button" target="_blank"><h5>' + callback.title + '</h5></a><p>' + callback.description + '</p><p id="tags-' + index + '"></p></div>');
+                        $("#row").append('<div class="col-lg-4 col-md-4 col-sm-6"><h5><a class="" href="' + callback.link + '" role="button" target="_blank">' + callback.title + '</a></h5><p>' + callback.description + '</p><p id="tags-' + index + '"></p></div>');
 
                         $.each(callback.categories, function (indexCat, callbackCat) {
                             //console.log(callbackCat);
@@ -147,6 +163,5 @@
             }
         });
     </script>
-
 </body>
 </html>
