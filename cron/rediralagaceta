@@ -6,6 +6,7 @@ server {
     listen [::]:80;
     server_name 
 		www.diariomegusta.com diariomegusta.com
+		www.diariomegusta.com.ar diariomegusta.com.ar
 		www.diariomegusta.mobi diariomegusta.mobi
 		www.diariomegusta.info diariomegusta.info
 	;
@@ -109,15 +110,30 @@ server {
 		try_files $uri $uri/ =404;
     }
 
-    location /getnews {
-	expires 8m;
-	proxy_cache backcache;
-	proxy_cache_bypass $http_cache_control;
-	add_header X-Proxy-Cache $upstream_cache_status;
+        location /getnews {
+	    expires 8m;
+	    add_header X-Proxy-Cache $upstream_cache_status;
+#	    proxy_cache backcache;
+#	    proxy_cache_bypass $http_cache_control;
+#
+#	    include proxy_params;
+#            proxy_pass https://api.rss2json.com/v1/api.json?api_key=d1ufn2m6kmtwzt6iw9symnlfycs0d4nfkcybdxmv&rss_url=http://www.lagaceta.com.ar/rss/seleccionadas;
 
-        include proxy_params;
-        proxy_pass https://api.rss2json.com/v1/api.json?api_key=d1ufn2m6kmtwzt6iw9symnlfycs0d4nfkcybdxmv&rss_url=http://www.lagaceta.com.ar/rss/seleccionadas;
-    }
+	    proxy_redirect off; 
+	    proxy_set_header        Host $host;
+    	    proxy_set_header        X-Forwarded-Host $host;
+    	    proxy_set_header        X-Forwarded-Server $host;
+    	    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    	    proxy_set_header        X-Real-IP  $remote_addr;
+
+            proxy_pass https://api.rss2json.com/v1/api.json?api_key=d1ufn2m6kmtwzt6iw9symnlfycs0d4nfkcybdxmv&rss_url=http://www.lagaceta.com.ar/rss/seleccionadas;
+
+            proxy_cache one;
+	    proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+    	    proxy_cache_valid 200 302 10m;
+    	    proxy_cache_valid 404 1m;
+	}
+
     location ~*  \.(jpg|jpeg|png|gif|ico|css|js)$ {
         expires 365d;
 	try_files $uri =404;
